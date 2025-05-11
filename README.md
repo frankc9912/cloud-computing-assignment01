@@ -145,22 +145,22 @@ Write a query to answer each of the questions below.
 7. [How many trips started on one day and ended on a different day?](query07.sql)
     ```SQL
     SELECT
-        EXTRACT(YEAR FROM start_time)::INT     AS trip_year,
-        EXTRACT(QUARTER FROM start_time)::INT  AS trip_quarter,
-        COUNT(*)                              AS num_trips
+        EXTRACT(YEAR FROM start_time)::INT AS trip_year,
+        EXTRACT(QUARTER FROM start_time)::INT AS trip_quarter,
+        COUNT(*) AS num_trips
     FROM indego.trips_2021_q3
     WHERE start_time::DATE <> end_time::DATE
-    GROUP BY 1, 2
+    GROUP BY trip_year, trip_quarter
 
     UNION ALL
 
     SELECT
-        EXTRACT(YEAR FROM start_time)::INT     AS trip_year,
-        EXTRACT(QUARTER FROM start_time)::INT  AS trip_quarter,
-        COUNT(*)                              AS num_trips
+        EXTRACT(YEAR FROM start_time)::INT AS trip_year,
+        EXTRACT(QUARTER FROM start_time)::INT AS trip_quarter,
+        COUNT(*) AS num_trips
     FROM indego.trips_2022_q3
     WHERE start_time::DATE <> end_time::DATE
-    GROUP BY 1, 2
+    GROUP BY trip_year, trip_quarter
 
     ORDER BY trip_year;
     ```
